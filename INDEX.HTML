@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>College Timetable Generator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app">
+    <section class="panel">
+      <h1>College Timetable</h1>
+      <p class="muted">Add teachers, choose Lecture or Lab, then generate a clash‑free timetable.</p>
+
+      <div class="form">
+        <label>Teacher Name
+          <input id="teacherName" type="text" placeholder="e.g. Mrs. Sharma" />
+        </label>
+        <label>Subject
+          <input id="subject" type="text" placeholder="e.g. Mathematics" />
+        </label>
+        <label>Type (Lecture / Lab)
+          <select id="classType">
+            <option value="Lecture">Lecture</option>
+            <option value="Lab">Lab</option>
+          </select>
+        </label>
+        <label>Classes / Week
+          <input id="classesPerWeek" type="number" min="1" max="60" placeholder="e.g. 8" />
+        </label>
+        <div class="buttons">
+          <button id="addTeacherBtn" class="primary" type="button">Add Teacher</button>
+          <button id="clearTeachersBtn" type="button">Clear All</button>
+        </div>
+        <div id="teacherMessage" class="notice info">Add teachers to begin.</div>
+      </div>
+
+      <div class="list" id="teacherList" aria-live="polite"></div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <div>
+          <h2>Weekly Timetable (Mon–Sat)</h2>
+          <p class="muted">6 lectures per day, lunch after Lecture 4. First four lectures show a “Morning” tag.</p>
+        </div>
+        <div class="buttons">
+          <button id="generateBtn" class="primary" type="button">Generate</button>
+          <button id="csvBtn" type="button" disabled>Download CSV</button>
+          <button id="pdfBtn" type="button" disabled>Download PDF</button>
+        </div>
+      </div>
+      <div id="timetableMessage" class="notice info">No timetable yet.</div>
+      <div class="table-wrap">
+        <table id="timetableTable" aria-label="Weekly timetable"></table>
+      </div>
+    </section>
+  </main>
+
+  <!-- jsPDF primary CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" crossorigin="anonymous"></script>
+  <!-- Fallback if first CDN fails -->
+  <script>
+    if (!window.jspdf) {
+      const s = document.createElement('script');
+      s.src = 'https://unpkg.com/jspdf@2.5.1/dist/jspdf.umd.min.js';
+      s.crossOrigin = 'anonymous';
+      document.head.appendChild(s);
+    }
+  </script>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
